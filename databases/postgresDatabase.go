@@ -15,7 +15,7 @@ type postgresDatabase struct {
 }
 
 var (
-	postgresDatabaseInstace *postgresDatabase
+	postgresDatabaseInstance *postgresDatabase
 	once                    sync.Once
 )
 
@@ -39,12 +39,12 @@ func NewPostgresDatabase(conf *config.Database) Database {
 
 		log.Printf("Connected to database %s", conf.DBName)
 
-		postgresDatabaseInstace = &postgresDatabase{conn}
+		postgresDatabaseInstance = &postgresDatabase{conn}
 	})
 
-	return postgresDatabaseInstace
+	return postgresDatabaseInstance
 }
 
-func (db *postgresDatabase) Connect() *gorm.DB {
-	return postgresDatabaseInstace.DB
+func (db *postgresDatabase) ConnectionGetting() *gorm.DB {
+	return postgresDatabaseInstance.DB
 }
